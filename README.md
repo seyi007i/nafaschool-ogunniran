@@ -13,4 +13,8 @@ NafaSchool will focus exclusively on pupil registration, guardian records, terml
 - Multiple payment integrations: Only one payment provider in test mode or a supplied mock provider for mobile-money transactions.
 The goal is to deliver a small, dependable product that solves the school's immediate fee-management problems without introducing unnecessary complexity.
 
+### Fee balance calculation
+The TypeScript function `getOutstandingBalance` calculates a termly fee as `45,000 + (D × 5,000)` XOF and subtracts recorded payments. Set `D` in the environment to a non-negative integer; an overpayment results in a zero outstanding balance. Payments are supplied as non-negative whole-number XOF amounts.
+
+Run `npm test` to compile the function and execute its unit tests.
 
