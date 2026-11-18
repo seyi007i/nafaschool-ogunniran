@@ -1,61 +1,37 @@
-# AI Model Selection and Orchestration Policy
+# Decision Record 01 – AI Model and Gateway Selection
 
-**OpenCode + OpenRouter**
+## Decision
+OpenCode as the AI development agent and OpenRouter as the central gateway for accessing multiple AI models.
 
-## 1. Objective
+## 1. Background
+The objective is to use AI models to support development tasks while controlling costs and maintaining flexibility. Rather than depending on one model or provider, the solution should allow different models to handle tasks according to their complexity.
 
-Establish a cost-effective and flexible approach to using multiple AI models through OpenCode and OpenRouter. The aim is to use affordable models for routine tasks, escalate complex work to more capable models, and introduce independent reviews when accuracy and reliability are critical.
+## 2. Selected Approach
 
-## 2. Model Selection
-
-| Role | Model | Purpose |
+| Component | Selection | Reason |
 | --- | --- | --- |
-| Default | `github Copilot` | Routine coding, simple scripts, small fixes and basic troubleshooting. |
-| Escalation | `Ice man` | Complex features, difficult bugs, architectural decisions and challenging edge cases. |
-| Independent Reviewer | `google/gemini-2.5-pro` | Reviewing important implementations, identifying errors and checking solution quality. |
+| AI Agent | OpenCode | Provides the development interface for working with different models. |
+| Gateway | OpenRouter | Provides access to multiple AI model providers through one API. |
+| Default Model | copilot | Suitable starting point for routine coding and simple fixes. |
+| Escalation Model | DeepSeek V3.2 | Used for complex coding, difficult bugs and advanced reasoning. |
+| Reviewer | Gemini 2.5 Pro | Provides a different model perspective for reviewing important changes. |
 
-> Model availability and pricing should be verified on OpenRouter before implementation.
+## 3. Alternatives Considered
+- Direct connection to individual model providers: Rejected because managing multiple API keys and provider configurations separately creates additional work.
+- Using only one AI model: Rejected because one model may not be suitable or cost-effective for every task.
+- Using a paid premium model for everything: Rejected because routine tasks do not always require expensive models.
+- Using a single provider's development environment: Rejected because it creates greater dependence on one provider.
 
-## 3. Escalation and Review Rules
+## 4. Reasons for the Decision
+The selected approach provides:
+- Access to several AI models through one gateway.
+- Lower costs by starting with a free model.
+- The ability to escalate when tasks become more difficult.
+- Independent review using a different model.
+- Flexibility to replace models without changing the overall workflow.
 
-Start with the default free model for tasks with clear requirements, predictable outputs and low business impact.
+## 5. Expected Outcome
+Development tasks will start with the default model. More capable models will be introduced when the task requires additional reasoning, while independent reviews will be used for important changes.
 
-**Escalate to a more capable model when:**
-
-- The default model produces incorrect or incomplete results.
-- The task involves complex logic, multiple components or difficult edge cases.
-- The work affects architecture, security or data integrity.
-
-**Introduce an independent reviewer when:**
-
-- Changes affect authentication, security or access control.
-- Database migrations or production deployments are involved.
-- Errors could cause service disruption or significant business impact.
-- The implementation requires additional assurance.
-
-The reviewer must independently assess the requirements, implementation, potential risks and test results. Identified issues must be resolved before approval.
-
-## 4. Execution Workflow
-
-1. **Define:** Clearly specify the task, inputs, expected outputs and edge cases.
-2. **Execute:** Submit the task to the default model through OpenCode.
-3. **Evaluate:** Check the output and run appropriate tests.
-4. **Escalate:** Change to a more capable model if the result is insufficient.
-5. **Review:** Engage a different model for independent assessment when risk justifies it.
-6. **Approve:** Resolve outstanding issues, validate the final output and proceed.
-
-## 5. Risk-Based Calibration
-
-The level of scrutiny should depend on three factors:
-
-- **Stakes:** How serious would an incorrect result be?
-- **Reversibility:** How easily can the change be undone?
-- **Scrutiny:** How much testing, review and approval does the task require?
-
-Low-risk, reversible tasks need basic validation. High-impact or difficult-to-reverse changes require stronger models, independent review, appropriate testing and formal approval.
-
-## Operating Principle
-
-Use the cheapest capable model first, escalate when complexity demands it, and introduce independent review when the consequences of failure justify the additional cost.
-
-This approach balances development cost, flexibility, quality and reliability without depending on a single AI model or provider.
+Final Decision: Adopt OpenCode and OpenRouter as the standard AI development setup, with model selection based on task complexity, cost and risk.
+--
