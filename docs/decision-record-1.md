@@ -34,3 +34,4 @@ The selected approach provides:
 Development tasks will start with the default model. More capable models will be introduced when the task requires additional reasoning, while independent reviews will be used for important changes.
 
 Final Decision: Adopt OpenCode and OpenRouter as the standard AI development setup, with model selection based on task complexity, cost and risk.
+--
